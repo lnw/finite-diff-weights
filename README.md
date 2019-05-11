@@ -20,8 +20,9 @@ that these weights are in no way wrong.
 
 
 
-## example weights for the Gauss-Lobatto grid with seven points in the intervall [-1,1]
+## example weights for the Gauss-Lobatto grid with seven points in the intervall [-1;1]
 
+'''
 x0: 0
 alpha: {-1,-0.830224,-0.468849,0,0.468849,0.830224,1}
 
@@ -60,4 +61,4 @@ derivative order 4:
 accuracy order 1: {0,37.0850702548,-116.285070255,158.4,-116.285070255,37.0850702548,0}
 accuracy order 2: {9.48410375888e-15,37.0850702548,-116.285070255,158.4,-116.285070255,37.0850702548,0}
 accuracy order 3: {-45.0000000002,145.584045661,-251.78404566,302.399999999,-251.78404566,145.584045661,-45.0000000002}
-
+'''
