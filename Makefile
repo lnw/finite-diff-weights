@@ -2,11 +2,7 @@
 #CXX=clang++
 CXX=g++
 
-FLAGS=-O0 -std=c++14 -Wunused -Wshadow -g #-Wall
-
-
-# build/%.o: %.cc $(HEADERS) Makefile
-#	$(CXX) $(FLAGS) -c $< -o $@
+FLAGS=-O2 -std=c++14 -Wunused -Wshadow # -g -Wall
 
 finite-diff-weights: finite-diff-weights.cc Makefile
 	$(CXX) $(FLAGS) $< -o $@

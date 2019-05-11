@@ -25,10 +25,8 @@ vector<vector<vector<double>>> get_weights(const int M, const int N, const doubl
 
       // if (n<=M) delta[n][n-1][nu] = 0.0;
       for (int m=0; m<=min(n,M); m++){
-        // cout << "c3: " << c3 << endl;
         if(m==0) delta[m][n][nu] = ((alpha[n] - x0)*delta[m][n-1][nu]) / c3;
         else delta[m][n][nu] = ((alpha[n] - x0)*delta[m][n-1][nu] - m*delta[m-1][n-1][nu]) / c3;
-        // cout << delta[n][nu][m] << endl;
         // cout << "writing " << n << ", " << nu << ", " << m << endl;
       }
     }
@@ -47,9 +45,10 @@ vector<vector<vector<double>>> get_weights(const int M, const int N, const doubl
 int main(int ac, char **av) {
 
   const int M = 4; // max derivative
-  const int N = 8; // will calculate all accuracies until n+1
-  const double x0 = -3.5;
-  vector<double> alpha({-4, -3, -2, -1, 0, 1, 2, 3, 4});
+  const int N = 6; // will calculate all accuracies until n+1
+  const double x0 = 0.0;
+  // vector<double> alpha({-4, -3, -2, -1, 0, 1, 2, 3, 4});
+  vector<double> alpha({-1,-0.830223896279,-0.468848793471,0,0.468848793471,0.830223896279,1});
   assert(alpha.size() > N);
   vector<double> alpha_sorted(alpha);
 
@@ -91,7 +90,7 @@ int main(int ac, char **av) {
 
   cout << "finite difference weights of grid points alpha (in the order of alpha):" << endl;
   for (int i=0; i<M+1; i++){
-    cout << "derivative order: " << i << endl;
+    cout << "derivative order " << i << ": " << endl;
     for (int j=i; j<N+1; j++){
       cout << setprecision(12) << "accuracy order " << j-i+1 << ": " << delta[i][j] << endl;
     }
