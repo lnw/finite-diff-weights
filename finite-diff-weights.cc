@@ -44,38 +44,39 @@ vector<vector<vector<double>>> get_weights(const int M, const int N, const doubl
 
 int main(int ac, char **av) {
 
+  const double eps = 1.e-10;
   const int M = 4; // max derivative
-  const int N = 6; // will calculate all accuracies until n+1
+  const int N = 6; // max accuracy
   const double x0 = 0.0;
-  // vector<double> alpha({-4, -3, -2, -1, 0, 1, 2, 3, 4});
+  // vector<double> alpha({-3, -2, -1, 0, 1, 2, 3});
   vector<double> alpha({-1,-0.830223896279,-0.468848793471,0,0.468848793471,0.830223896279,1});
+  // vector<double> alpha({-3,-2.4906716888357,-1.40654638041214,0,1.40654638041214,2.4906716888357,3});
   assert(alpha.size() > N);
   vector<double> alpha_sorted(alpha);
 
   // alpha should be sorted ascendingly
-  sort(&alpha[0], &alpha[0]+N+1);
+  sort(&alpha[0], &alpha[0]+alpha.size());
+  // cout << alpha << endl;
 
   // but get_weights works on an alpha with increasing distance from x0
   for (double &d: alpha_sorted) d -= x0;
-  sort(&alpha_sorted[0], &alpha_sorted[0]+N+1, abs_comp);
+  sort(&alpha_sorted[0], &alpha_sorted[0]+alpha_sorted.size(), abs_comp);
   for (double &d: alpha_sorted) d += x0;
-  // cout << alpha_sorted << endl;
+  // cout << "alpha sorted: " << alpha_sorted << endl;
 
-  vector<double> map(N+1);
-  for (int i=0; i<N+1; i++){
-    for (int j=0; j<N+1; j++){
-      if(alpha[j] == alpha_sorted[i]) map[i] = j;
+  vector<double> map(alpha.size());
+  for (int i=0; i<alpha.size(); i++){
+    for (int j=0; j<alpha.size(); j++){
+      if( (alpha[j] - alpha_sorted[i]) < eps) map[i] = j;
     }
   }
-  // cout << map << endl;
+  // cout << "map: " << map << endl;
 
   vector<vector<vector<double>>> delta;
   delta = get_weights(M, N, x0, alpha_sorted);
 
   cout << "x0: " << x0 << endl;
   cout << "alpha: " << alpha << endl << endl;
-
-//   cout << delta << endl;
 
   // reorder according to ordered alpha
   for(int m=0; m<M+1; m++){

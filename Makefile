@@ -4,7 +4,7 @@ CXX=g++
 
 FLAGS=-O2 -std=c++14 -Wunused -Wshadow # -g -Wall
 
-finite-diff-weights: finite-diff-weights.cc Makefile
+finite-diff-weights: finite-diff-weights.cc auxiliary.hh Makefile
 	$(CXX) $(FLAGS) $< -o $@
 
 clean:
