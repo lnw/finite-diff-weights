@@ -46,11 +46,11 @@ int main(int ac, char **av) {
 
   const double eps = 1.e-10;
   const int M = 3; // max derivative
-  const int N = 7; // max accuracy
-  const double x0 = 0.0;
-  vector<double> alpha({-4, -3, -2, -1, 0, 1, 2, 3, 4});
-  // vector<double> alpha({-1,-0.830223896279,-0.468848793471,0,0.468848793471,0.830223896279,1});
-  // vector<double> alpha({-3,-2.4906716888357,-1.40654638041214,0,1.40654638041214,2.4906716888357,3});
+  const int N = 6; // max accuracy
+  const double x0 = 0;
+  // vector<double> alpha({ -3, -2, -1, 0, 1, 2, 3});
+  // vector<double> alpha({-1,-0.830223896279,-0.468848793471,0,0.468848793471,0.830223896279,1}); // gauss lobatto
+  vector<double> alpha({-3.0, -2.7185395378159924, -1.6154079303170494, 0, 1.6154079303170494, 2.7185395378159924, 3.0}); // gauss lobatto
   const int n_pt = alpha.size();
   assert(n_pt > N);
   if(N+1 != n_pt) cerr << " !!! Normally, one would want an accuracy of one lower than the number of points. !!!" << endl;
