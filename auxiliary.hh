@@ -6,15 +6,14 @@
 #include <sstream>
 #include <vector>
 
-using namespace std;
 
-template <typename S, typename T> ostream& operator<<(ostream& s, const pair<S,T>& p) {
+template <typename S, typename T> std::ostream& operator<<(std::ostream& s, const std::pair<S,T>& p) {
   s << "{" << p.first << "," << p.second << "}";
   return s;
 }
 
 #define container_output(container) \
-  template <typename T> ostream& operator<<(ostream& s, const container<T>& v) \
+  template <typename T> std::ostream& operator<<(std::ostream& s, const container<T>& v) \
   { \
   s << "{"; \
   for(typename container<T>::const_iterator x(v.begin());x!=v.end();){ \
@@ -25,10 +24,7 @@ template <typename S, typename T> ostream& operator<<(ostream& s, const pair<S,T
   return s; \
 }
 
-container_output(vector);
-
-// auto abs_comp=[](int i, int j) { return abs(i) < abs(j); };
-auto abs_comp=[](double i, double j) { return abs(i) < abs(j); };
+container_output(std::vector);
 
 
 #endif
